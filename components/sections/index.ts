@@ -1,2 +1,1 @@
-// Export studio sections
-export {};
+export * from "./manifesto-section";
