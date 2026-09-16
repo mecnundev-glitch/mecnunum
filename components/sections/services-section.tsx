@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,19 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+// Lazy load the experimental 3D spatial world to maintain fast LCP
+const ServicesSpatialWorld = dynamic(
+  () => import("@/components/three/ServicesSpatialWorld"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex h-44 w-full items-center justify-center rounded-2xl border border-white/5 bg-zinc-950/40">
+        <div className="h-10 w-10 animate-pulse rounded-full border border-studio-cyan/30 bg-studio-cyan/10" />
+      </div>
+    ),
+  }
+);
+
 const SERVICE_META = [
   {
     index: "01",
@@ -30,6 +44,7 @@ const SERVICE_META = [
     pillColor: "text-studio-cyan border-studio-cyan/30 bg-studio-cyan/10",
     badge: "Design Systems & UI Architecture",
     previewDesc: "Pixel-precise visual systems with deep typography fidelity and interactive prototyping.",
+    spatialGeometry: "Morphing Wireframe Icosahedron",
   },
   {
     index: "02",
@@ -39,6 +54,7 @@ const SERVICE_META = [
     pillColor: "text-studio-lime border-studio-lime/30 bg-studio-lime/10",
     badge: "Full-Stack Next.js & TypeScript",
     previewDesc: "Sub-second load times, server-driven architecture, and zero-compromise security.",
+    spatialGeometry: "Cybernetic Logic Matrix",
   },
   {
     index: "03",
@@ -48,6 +64,7 @@ const SERVICE_META = [
     pillColor: "text-purple-400 border-purple-400/30 bg-purple-400/10",
     badge: "Enterprise Flagships & Multilingual",
     previewDesc: "Authoritative digital headquarters designed for global corporations and discerning brands.",
+    spatialGeometry: "Enterprise Obelisk Pillar",
   },
   {
     index: "04",
@@ -57,6 +74,7 @@ const SERVICE_META = [
     pillColor: "text-amber-400 border-amber-400/30 bg-amber-400/10",
     badge: "Headless Shopify & Custom Stores",
     previewDesc: "High-velocity checkout pipelines, headless commerce, and frictionless purchasing flows.",
+    spatialGeometry: "Circulation Flow Torus",
   },
   {
     index: "05",
@@ -66,6 +84,7 @@ const SERVICE_META = [
     pillColor: "text-emerald-400 border-emerald-400/30 bg-emerald-400/10",
     badge: "Lighthouse 100 & Schema SEO",
     previewDesc: "Technical search indexing, edge CDN tuning, and structured data dominance.",
+    spatialGeometry: "Orbit Radar Resonance Rings",
   },
   {
     index: "06",
@@ -75,26 +94,17 @@ const SERVICE_META = [
     pillColor: "text-studio-fuchsia border-studio-fuchsia/30 bg-studio-fuchsia/10",
     badge: "WebGL / Three.js & GLSL Shaders",
     previewDesc: "Spatial 3D digital worlds, interactive product configurators, and 60fps WebGL simulations.",
+    spatialGeometry: "Quantum Polyhedral Core",
   },
 ];
 
 export function ServicesSection() {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number>(0);
   const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const checkTouch = () => {
-      setIsTouchDevice(window.matchMedia("(hover: none)").matches);
-    };
-    checkTouch();
-    window.addEventListener("resize", checkTouch);
-    return () => window.removeEventListener("resize", checkTouch);
-  }, []);
-
-  const activeMeta = hoveredIndex !== null ? SERVICE_META[hoveredIndex] : SERVICE_META[0];
-  const activeService = hoveredIndex !== null ? SERVICES_LIST[hoveredIndex] : SERVICES_LIST[0];
+  const activeMeta = SERVICE_META[hoveredIndex] || SERVICE_META[0];
+  const activeService = SERVICES_LIST[hoveredIndex] || SERVICES_LIST[0];
 
   return (
     <section
@@ -128,18 +138,17 @@ export function ServicesSection() {
           </div>
 
           <p className="max-w-md text-sm sm:text-base font-medium text-muted-foreground leading-relaxed">
-            Full-spectrum digital craftsmanship combining modern web engineering, editorial aesthetics, and high-performance WebGL.
+            Full-spectrum digital craftsmanship combining modern web engineering, editorial aesthetics, and spatial 3D WebGL.
           </p>
         </div>
 
-        {/* Desktop Layout: Split View (Interactive List + Floating Live Preview Box) */}
+        {/* Desktop Layout: Split View (Interactive List + 3D Spatial World Preview) */}
         <div className="mt-8 hidden lg:grid lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Interactive Editorial List (7 cols) */}
           <div className="lg:col-span-7 divide-y divide-white/10">
             {SERVICES_LIST.map((service, index) => {
               const meta = SERVICE_META[index];
               const isHovered = hoveredIndex === index;
-              const Icon = meta.icon;
 
               return (
                 <Link
@@ -212,13 +221,13 @@ export function ServicesSection() {
             })}
           </div>
 
-          {/* Right Column: Live Sticky Preview Card (5 cols) */}
+          {/* Right Column: 3D Spatial World & Sticky Preview Card (5 cols) */}
           <div className="lg:col-span-5 sticky top-28">
-            <div className="rounded-3xl border border-white/15 dark:border-white/10 bg-zinc-950/80 p-8 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <div className="rounded-3xl border border-white/15 dark:border-white/10 bg-zinc-950/85 p-6 sm:p-7 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative overflow-hidden">
               {/* Background gradient mesh */}
               <div
                 className={cn(
-                  "pointer-events-none absolute -top-1/2 -right-1/2 h-full w-full rounded-full bg-gradient-to-br blur-[90px] opacity-40 transition-all duration-500",
+                  "pointer-events-none absolute -top-1/2 -right-1/2 h-full w-full rounded-full bg-gradient-to-br blur-[90px] opacity-35 transition-all duration-500",
                   activeMeta.gradientClass
                 )}
               />
@@ -226,7 +235,7 @@ export function ServicesSection() {
               {/* Service Indicator Badge */}
               <div className="relative z-10 flex items-center justify-between">
                 <span className="font-mono text-xs text-studio-lime font-bold tracking-wider">
-                  SERVICE SPECIFICATION // {activeMeta.index}
+                  SPATIAL ARCHITECTURE // {activeMeta.index}
                 </span>
                 <span
                   className={cn(
@@ -235,20 +244,19 @@ export function ServicesSection() {
                   )}
                 >
                   <Sparkles className="h-3 w-3" />
-                  <span>ACTIVE</span>
+                  <span>{activeMeta.spatialGeometry}</span>
                 </span>
               </div>
 
-              {/* Title & Icon Header */}
-              <div className="relative z-10 mt-6 flex items-center gap-4">
-                <div
-                  className="h-14 w-14 rounded-2xl border border-white/15 flex items-center justify-center bg-white/5 shadow-inner"
-                  style={{ color: activeMeta.color }}
-                >
-                  {React.createElement(activeMeta.icon, { className: "h-7 w-7" })}
-                </div>
+              {/* 3D Real-time Spatial Constellation Viewport */}
+              <div className="relative z-10 my-4 h-48 w-full rounded-2xl border border-white/10 bg-black/50 overflow-hidden shadow-inner">
+                <ServicesSpatialWorld activeIndex={hoveredIndex} className="h-full w-full" />
+              </div>
+
+              {/* Title & Tagline */}
+              <div className="relative z-10 flex items-center justify-between">
                 <div>
-                  <h4 className="font-mono text-2xl font-black text-foreground uppercase">
+                  <h4 className="font-mono text-xl font-black text-foreground uppercase">
                     {activeService.title}
                   </h4>
                   <p className="text-xs font-mono text-muted-foreground">{activeService.tagline}</p>
@@ -256,22 +264,19 @@ export function ServicesSection() {
               </div>
 
               {/* Description */}
-              <div className="relative z-10 mt-6 pt-6 border-t border-white/10">
-                <p className="text-sm font-medium text-zinc-300 leading-relaxed">
+              <div className="relative z-10 mt-4 pt-4 border-t border-white/10">
+                <p className="text-xs sm:text-sm font-medium text-zinc-300 leading-relaxed">
                   {activeService.description}
                 </p>
               </div>
 
-              {/* Key Features Pill Matrix */}
-              <div className="relative z-10 mt-6 pt-6 border-t border-white/10">
-                <span className="block font-mono text-[11px] text-muted-foreground uppercase mb-3">
-                  Architecture & Deliverables
-                </span>
-                <div className="flex flex-wrap gap-2">
+              {/* Deliverables Matrix */}
+              <div className="relative z-10 mt-4 pt-4 border-t border-white/10">
+                <div className="flex flex-wrap gap-1.5">
                   {activeService.features.map((feature, fIdx) => (
                     <span
                       key={fIdx}
-                      className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono text-zinc-300"
+                      className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] font-mono text-zinc-300"
                     >
                       {feature}
                     </span>
@@ -280,14 +285,14 @@ export function ServicesSection() {
               </div>
 
               {/* Direct Landing Page CTA */}
-              <div className="relative z-10 mt-8 pt-6 border-t border-white/10">
+              <div className="relative z-10 mt-6 pt-4 border-t border-white/10">
                 <Link href={`/services/${activeService.slug}`} className="block w-full">
                   <Button
                     variant="outline"
-                    className="w-full justify-between font-mono font-bold text-xs uppercase border-white/15 hover:border-studio-cyan hover:bg-studio-cyan/10 hover:text-studio-cyan transition-all py-6 group"
+                    className="w-full justify-between font-mono font-bold text-xs uppercase border-white/15 hover:border-studio-cyan hover:bg-studio-cyan/10 hover:text-studio-cyan transition-all py-5 group"
                   >
-                    <span>View {activeService.title} Details</span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <span>Explore {activeService.title}</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </Button>
                 </Link>
               </div>
@@ -300,7 +305,6 @@ export function ServicesSection() {
           {SERVICES_LIST.map((service, index) => {
             const meta = SERVICE_META[index];
             const isExpanded = activeMobileIndex === index;
-            const Icon = meta.icon;
 
             return (
               <div
@@ -345,7 +349,7 @@ export function ServicesSection() {
                   </div>
                 </button>
 
-                {/* Collapsible Content Body */}
+                {/* Collapsible Content Body with Optional Spatial Preview */}
                 <AnimatePresence>
                   {isExpanded && (
                     <motion.div
@@ -355,12 +359,18 @@ export function ServicesSection() {
                       transition={{ duration: shouldReduceMotion ? 0.05 : 0.25 }}
                       className="overflow-hidden border-t border-white/10 px-5 pb-5 pt-4 space-y-4"
                     >
+                      {/* Spatial Element Info */}
+                      <div className="flex items-center justify-between text-[11px] font-mono text-studio-cyan bg-studio-cyan/10 px-3 py-1.5 rounded-lg border border-studio-cyan/20">
+                        <span>SPATIAL OBJECT:</span>
+                        <span className="font-bold">{meta.spatialGeometry}</span>
+                      </div>
+
                       <p className="text-sm text-zinc-300 leading-relaxed">
                         {service.description}
                       </p>
 
                       {/* Features */}
-                      <div className="flex flex-wrap gap-1.5 pt-2">
+                      <div className="flex flex-wrap gap-1.5 pt-1">
                         {service.features.map((feat, fIdx) => (
                           <span
                             key={fIdx}
@@ -372,7 +382,7 @@ export function ServicesSection() {
                       </div>
 
                       {/* Link to dedicated landing page */}
-                      <div className="pt-3">
+                      <div className="pt-2">
                         <Link href={`/services/${service.slug}`} className="block">
                           <Button
                             variant="accent"

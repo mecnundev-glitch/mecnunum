@@ -8,3 +8,4 @@ export * from "./ParticleField";
 export * from "./InteractiveObject";
 export * from "./WebGLFallback";
 export * from "./use-adaptive-3d-quality";
+export * from "./ServicesSpatialWorld";
