@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand Accent Colors */
+    --color-cyan: 184 100% 50%;
+    --color-lime: 75 100% 50%;
+    --color-fuchsia: 330 100% 50%;
+    --color-purple: 277 100% 50%;
+
+    /* Light Mode Design System Surfaces */
+    --background: 0 0% 98%;
+    --foreground: 240 10% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+    --primary: 240 6% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 5% 94%;
+    --secondary-foreground: 240 6% 10%;
+    --muted: 240 5% 92%;
+    --muted-foreground: 240 4% 40%;
+    --accent: 75 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 88%;
+    --input: 240 6% 88%;
+    --ring: 184 100% 50%;
+    --radius: 0.75rem;
+
+    /* Glows */
+    --glow-cyan: 0 0 25px rgba(0, 240, 255, 0.35);
+    --glow-lime: 0 0 25px rgba(204, 255, 0, 0.35);
+    --glow-fuchsia: 0 0 25px rgba(255, 0, 127, 0.35);
+  }
+
+  .dark {
+    /* Dark Mode Design System Surfaces */
+    --background: 240 14% 3%;      /* #08080A */
+    --foreground: 0 0% 98%;
+    --card: 240 10% 5%;            /* #101014 */
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 5%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 6% 10%;
+    --secondary: 240 8% 10%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 8% 12%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 75 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 14%;
+    --input: 240 6% 14%;
+    --ring: 184 100% 50%;
+
+    /* Enhanced Dark Glows */
+    --glow-cyan: 0 0 35px rgba(0, 240, 255, 0.45);
+    --glow-lime: 0 0 35px rgba(204, 255, 0, 0.45);
+    --glow-fuchsia: 0 0 35px rgba(255, 0, 127, 0.45);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-studio-lime selection:text-black;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Glassmorphism Utilities */
+@layer utilities {
+  .glass-panel {
+    background: rgba(16, 16, 20, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel-elevated {
+    background: rgba(24, 24, 31, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .glass-panel-glow {
+    background: rgba(16, 16, 20, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+  }
+
+  .text-glow-lime {
+    text-shadow: 0 0 20px rgba(204, 255, 0, 0.6);
+  }
+
+  .text-glow-fuchsia {
+    text-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+  }
+}
+
+/* Lenis Smooth Scroll Standard Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom Minimal Studio Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 140, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 240, 255, 0.4);
+}
