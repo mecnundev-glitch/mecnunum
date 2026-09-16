@@ -183,6 +183,7 @@ export function InteractiveTechMatrix() {
                 type="button"
                 onClick={() => setSelectedTechId(tech.id)}
                 onMouseEnter={() => setSelectedTechId(tech.id)}
+                onFocus={() => setSelectedTechId(tech.id)}
                 className={cn(
                   "group relative flex flex-col items-center justify-center p-5 rounded-2xl border text-center transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-cyan cursor-pointer select-none",
                   isSelected

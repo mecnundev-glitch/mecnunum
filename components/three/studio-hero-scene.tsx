@@ -384,7 +384,7 @@ export function StudioHeroScene({
   }
 
   return (
-    <div className={className}>
+    <div className={className} aria-hidden="true" tabIndex={-1}>
       <Canvas
         camera={{ position: [0, 0, isMobile ? 7.2 : 6.6], fov: 45 }}
         gl={{

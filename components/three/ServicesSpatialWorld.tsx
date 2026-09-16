@@ -324,7 +324,7 @@ export function ServicesSpatialWorld({
   }
 
   return (
-    <div className={className}>
+    <div className={className} aria-hidden="true" tabIndex={-1}>
       <Canvas
         camera={{ position: [0, 0, 5.5], fov: 45 }}
         dpr={[1, isMobile ? 1 : Math.min(dpr, 1.5)]}

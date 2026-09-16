@@ -44,11 +44,15 @@ export function Navbar() {
         {/* Desktop CTA & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
-          <Link href="/contact" tabIndex={-1}>
+          <Link
+            href="/contact"
+            className="rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background inline-flex"
+          >
             <Button
               variant="accent"
               size="sm"
-              className="font-black text-black gap-1.5 group shadow-[0_0_18px_rgba(204,255,0,0.25)] hover:shadow-[0_0_28px_rgba(204,255,0,0.45)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
+              tabIndex={-1}
+              className="font-black text-black gap-1.5 group shadow-[0_0_18px_rgba(204,255,0,0.25)] hover:shadow-[0_0_28px_rgba(204,255,0,0.45)] hover:scale-[1.03] active:scale-[0.98] transition-all duration-200 pointer-events-none"
             >
               <span>Start a Project</span>
               <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

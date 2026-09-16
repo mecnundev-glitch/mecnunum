@@ -143,6 +143,8 @@ export function SelectedWorkSection() {
               >
                 <Link
                   href={`/work/${project.slug}`}
+                  onFocus={() => setHoveredSlug(project.slug)}
+                  onBlur={() => setHoveredSlug(null)}
                   className="block rounded-3xl border border-white/10 dark:border-white/10 bg-zinc-950/60 p-5 sm:p-6 backdrop-blur-xl transition-all duration-500 hover:border-white/25 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-studio-cyan"
                 >
                   {/* Card Visual Artwork / Display Container */}

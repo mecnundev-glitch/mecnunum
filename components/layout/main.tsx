@@ -8,7 +8,10 @@ interface MainProps extends React.HTMLAttributes<HTMLElement> {
 export function Main({ children, className, ...props }: MainProps) {
   return (
     <main
-      className={cn("min-h-[calc(100vh-4rem-6rem)] flex-1 flex flex-col", className)}
+      id="main-content"
+      tabIndex={-1}
+      role="main"
+      className={cn("min-h-[calc(100vh-4rem-6rem)] flex-1 flex flex-col outline-none", className)}
       {...props}
     >
       {children}
