@@ -215,10 +215,22 @@ export default function ProjectDetailPage({ params }: ProjectPageProps) {
           {/* ─── 01 PROJECT HERO ─── */}
           <header className="mt-10 sm:mt-16">
             <FadeIn direction="up" delay={0.1}>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-xs font-mono text-muted-foreground backdrop-blur-md">
+              <Link
+                href={
+                  data.category.toLowerCase().includes("3d")
+                    ? "/services/3d-experiences"
+                    : data.category.toLowerCase().includes("commerce")
+                    ? "/services/ecommerce"
+                    : data.category.toLowerCase().includes("design")
+                    ? "/services/web-design"
+                    : "/services/web-development"
+                }
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1 text-xs font-mono text-muted-foreground backdrop-blur-md hover:border-studio-cyan/50 hover:text-studio-cyan transition-colors"
+              >
                 <Terminal className="h-3 w-3" style={{ color: data.color }} />
                 <span className="text-foreground font-bold">{data.category}</span>
-              </div>
+                <span className="text-[10px] text-zinc-500">{"// EXPLORE SERVICE →"}</span>
+              </Link>
 
               <h1 className="mt-6 text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black uppercase font-mono tracking-tight text-foreground">
                 {data.title}

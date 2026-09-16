@@ -284,6 +284,40 @@ export default async function BlogPostDetailPage({ params }: BlogPostPageProps) 
             ))}
           </div>
 
+          {/* Contextual Studio Capability Card (Blog -> Service -> Contact) */}
+          <div className="mt-8 rounded-2xl border border-studio-cyan/30 bg-studio-cyan/[0.03] p-6 backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="text-[11px] font-mono text-studio-cyan uppercase font-bold flex items-center gap-1.5">
+                <Terminal className="h-3.5 w-3.5" />
+                <span>STUDIO CAPABILITY // {post.category}</span>
+              </div>
+              <p className="text-xs sm:text-sm text-zinc-300">
+                Interested in implementing this architecture in your business? Explore our specialized studio offering.
+              </p>
+            </div>
+            <div className="flex items-center gap-3 shrink-0">
+              <Link
+                href={
+                  post.category.includes("3D")
+                    ? "/services/3d-experiences"
+                    : post.category.includes("Design")
+                    ? "/services/web-design"
+                    : post.category.includes("Performance")
+                    ? "/services/seo"
+                    : post.category.includes("Commerce")
+                    ? "/services/ecommerce"
+                    : "/services/web-development"
+                }
+              >
+                <Button variant="accent" size="sm" className="font-mono text-xs uppercase font-bold text-black gap-1.5">
+                  <span>Explore Service</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+
+
           {/* Author Bio Card */}
           <div className="mt-12 rounded-2xl border border-white/10 bg-zinc-950/80 p-6 sm:p-8 backdrop-blur-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div className="flex items-center gap-4">

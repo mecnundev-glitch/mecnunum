@@ -350,6 +350,51 @@ export function ServiceLandingView({ service }: ServiceLandingViewProps) {
         </Container>
       </section>
 
+      {/* ─── 06 PROVEN ARCHITECTURE CASE STUDY (SERVICE -> WORK -> CONTACT) ─── */}
+      <section className="py-20 sm:py-28 border-b border-white/10 bg-gradient-to-b from-transparent to-zinc-950/60">
+        <Container>
+          <FadeIn direction="up">
+            <div className="rounded-3xl border border-white/15 bg-zinc-950/80 p-8 sm:p-12 backdrop-blur-2xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="space-y-3 max-w-xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-studio-cyan/30 bg-studio-cyan/5 px-3 py-1 text-xs font-mono text-studio-cyan">
+                  <Terminal className="h-3.5 w-3.5" />
+                  <span>{"PROVEN DEPLOYMENT // INTERNAL LINK"}</span>
+                </div>
+                <h2 className="text-2xl sm:text-4xl font-bold font-mono uppercase text-foreground">
+                  Explore Live Production Case Studies
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                  See how our {service.title} engineering is implemented in real-world flagship projects with sub-second performance budgets and 60 FPS spatial graphics.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="/work">
+                  <Button
+                    variant="accent"
+                    size="lg"
+                    className="gap-2 font-bold text-black font-mono uppercase text-xs"
+                  >
+                    <span>Inspect Case Studies</span>
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="gap-2 border-white/20 font-mono uppercase text-xs hover:border-studio-cyan"
+                  >
+                    <span>Request Custom Scope</span>
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </FadeIn>
+        </Container>
+      </section>
+
+
       {/* ─── 06 FREQUENTLY ASKED QUESTIONS (FAQ) ─── */}
       <section className="py-20 sm:py-28 border-b border-white/10 bg-zinc-950/40">
         <Container>
