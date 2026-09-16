@@ -5,24 +5,34 @@ export interface NavItem {
 }
 
 export interface Project {
-  id: string;
+  slug: string;
   title: string;
   category: string;
   description: string;
-  tags: string[];
+  tagline: string;
   year: string;
+  technologies: string[];
+  tags: string[]; // alias for technologies backwards compatibility
+  image: string;
+  featured: boolean;
+  color?: string;
+  accentGradient?: string;
   link?: string;
-  image?: string;
 }
 
 export interface Service {
-  id: string;
+  slug: string;
   title: string;
+  tagline: string;
   description: string;
-  capabilities: string[];
+  features: string[];
 }
 
-export interface SceneProps {
-  className?: string;
-  enableInteraction?: boolean;
+export interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  readTime: string;
+  excerpt: string;
+  tags: string[];
 }

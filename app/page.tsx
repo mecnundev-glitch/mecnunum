@@ -6,6 +6,7 @@ import { SceneCanvas } from "@/components/three/scene-canvas";
 import { FadeIn, Magnetic, TextReveal } from "@/components/motion";
 import { ManifestoSection } from "@/components/sections/manifesto-section";
 import { ServicesSection } from "@/components/sections/services-section";
+import { SelectedWorkSection } from "@/components/sections/selected-work-section";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowUpRight, Code2, FolderKanban, Terminal, ChevronDown } from "lucide-react";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
@@ -167,8 +168,11 @@ export default function HomePage() {
       {/* ─── 02 EDITORIAL MANIFESTO SECTION (SCROLL-DRIVEN REVEAL) ─── */}
       <ManifestoSection />
 
-      {/* ─── 03 SERVICES EXPERIENCE SECTION (INTERACTIVE EDITORIAL LIST) ─── */}
+      {/* ─── 03 SERVICES EXPERIENCE SECTION (INTERACTIVE EDITORIAL LIST & 3D WORLD) ─── */}
       <ServicesSection />
+
+      {/* ─── 04 SELECTED WORK SECTION (DATA-DRIVEN EDITORIAL PORTFOLIO) ─── */}
+      <SelectedWorkSection />
     </div>
   );
 }
