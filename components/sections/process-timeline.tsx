@@ -244,10 +244,10 @@ export function ProcessTimeline() {
               </div>
 
               {/* Stage Card Content (Takes 50% width on desktop) */}
-              <div className="w-full lg:w-[calc(50%-3rem)] pl-12 lg:pl-0">
+              <div className="w-full lg:w-[calc(50%-3rem)] pl-8 sm:pl-12 lg:pl-0">
                 <div
                   className={cn(
-                    "rounded-3xl border border-white/10 bg-zinc-950/80 p-6 sm:p-8 backdrop-blur-2xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative overflow-hidden group"
+                    "rounded-3xl border border-white/10 bg-zinc-950/80 p-5 sm:p-8 backdrop-blur-2xl transition-all duration-300 hover:border-white/20 hover:shadow-[0_12px_40px_rgba(0,0,0,0.5)] relative overflow-hidden group"
                   )}
                 >
                   {/* Subtle Background Glow */}

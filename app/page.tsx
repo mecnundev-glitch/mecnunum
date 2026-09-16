@@ -78,7 +78,7 @@ export default function HomePage() {
 
           {/* Primary Hero Title with Word-by-Word Reveal */}
           <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight font-mono uppercase leading-[1.08] select-none">
+            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight font-mono uppercase leading-[1.08] select-none break-words">
               <span className="block text-foreground drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
                 <TextReveal text="Digital experiences," delay={0.15} />
               </span>
