@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container";
 import { NavLinks } from "@/components/navigation/nav-links";
 import { MobileNav } from "@/components/navigation/mobile-nav";
 import { ThemeToggle } from "@/components/navigation/theme-toggle";
+import { LanguageToggle } from "@/components/navigation/language-toggle";
 import { Button } from "@/components/ui/button";
 import { MecnunLogo } from "@/components/ui/mecnun-logo";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
@@ -41,8 +42,9 @@ export function Navbar() {
           <NavLinks />
         </div>
 
-        {/* Desktop CTA & Theme Toggle */}
+        {/* Desktop CTA, Language Toggle & Theme Toggle */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle />
           <Link
             href="/contact"
@@ -62,6 +64,7 @@ export function Navbar() {
 
         {/* Mobile Navigation Controls */}
         <div className="flex md:hidden items-center gap-2">
+          <LanguageToggle />
           <ThemeToggle />
           <MobileNav />
         </div>

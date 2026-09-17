@@ -4,10 +4,11 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { NAV_ITEMS, STUDIO_STATUS } from "@/lib/constants";
+import { STUDIO_STATUS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
 import { ArrowUpRight, Mail, Sparkles } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 export function MobileNav() {
@@ -16,21 +17,28 @@ export function MobileNav() {
   const shouldReduceMotion = useReducedMotion();
   const triggerButtonRef = useRef<HTMLButtonElement>(null);
   const navContainerRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
+
+  const navItems = [
+    { label: t.nav.work, href: "/work" },
+    { label: t.nav.services, href: "/services" },
+    { label: t.nav.process, href: "/process" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.blog, href: "/blog" },
+    { label: t.nav.contact, href: "/contact" },
+  ];
 
   const closeMenu = useCallback(() => {
     setIsOpen(false);
-    // Return focus to trigger button
     triggerButtonRef.current?.focus();
   }, []);
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
 
-  // Close on route change
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Handle Escape key, body scroll lock, and Focus Trap
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isOpen) return;
@@ -41,7 +49,6 @@ export function MobileNav() {
         return;
       }
 
-      // Simple focus trap
       if (e.key === "Tab" && navContainerRef.current) {
         const focusableElements = navContainerRef.current.querySelectorAll<HTMLElement>(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -156,7 +163,7 @@ export function MobileNav() {
 
             {/* Staggered Navigation Links */}
             <nav className="my-auto py-8 space-y-3" aria-label="Mobile Navigation">
-              {NAV_ITEMS.map((item, index) => {
+              {navItems.map((item, index) => {
                 const isActive =
                   pathname === item.href ||
                   (item.href !== "/" && pathname.startsWith(item.href));
@@ -229,7 +236,7 @@ export function MobileNav() {
                   className="w-full gap-2 font-black text-black shadow-[0_0_25px_rgba(204,255,0,0.3)] hover:shadow-[0_0_35px_rgba(204,255,0,0.5)] transition-all active:scale-[0.98]"
                 >
                   <Sparkles className="h-4 w-4" />
-                  <span>Start a Project</span>
+                  <span>{t.nav.startProject}</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Button>
               </Link>

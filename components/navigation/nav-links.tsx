@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { NAV_ITEMS } from "@/lib/constants";
 import { motion, useReducedMotion } from "framer-motion";
+import { useLanguage } from "@/lib/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 interface NavLinksProps {
@@ -16,6 +16,16 @@ export function NavLinks({ className, itemClassName }: NavLinksProps) {
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const [hoveredHref, setHoveredHref] = useState<string | null>(null);
+  const { t } = useLanguage();
+
+  const navItems = [
+    { label: t.nav.work, href: "/work" },
+    { label: t.nav.services, href: "/services" },
+    { label: t.nav.process, href: "/process" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.blog, href: "/blog" },
+    { label: t.nav.contact, href: "/contact" },
+  ];
 
   return (
     <nav
@@ -23,7 +33,7 @@ export function NavLinks({ className, itemClassName }: NavLinksProps) {
       className={cn("flex items-center gap-1 sm:gap-1.5", className)}
       onMouseLeave={() => setHoveredHref(null)}
     >
-      {NAV_ITEMS.map((item) => {
+      {navItems.map((item) => {
         const isActive =
           pathname === item.href ||
           (item.href !== "/" && pathname.startsWith(item.href));

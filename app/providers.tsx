@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { SmoothScrollProvider } from "@/components/motion/lenis-provider";
+import { LanguageProvider } from "@/lib/i18n/language-context";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
-      <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      <LanguageProvider>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </LanguageProvider>
     </NextThemesProvider>
   );
 }

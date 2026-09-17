@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
 import { STUDIO_STATUS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 // Dynamic load 3D background to prevent SSR blocking
@@ -73,6 +74,7 @@ const INITIAL_FORM: ContactState = {
 
 export function ContactSection() {
   const formId = useId();
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<ContactState>(INITIAL_FORM);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [activeField, setActiveField] = useState<string | null>(null);
@@ -218,18 +220,17 @@ export function ContactSection() {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-studio-cyan/30 bg-studio-cyan/5 px-4 py-1.5 text-xs font-mono text-studio-cyan">
             <MecnunCatIcon size={18} />
-            <span>{"05 // DIRECT TRANSMISSION & INQUIRY"}</span>
+            <span>{t.contact.badge}</span>
           </div>
 
           <h2
             id="contact-heading"
             className="mt-6 text-4xl font-black tracking-tight sm:text-6xl lg:text-7xl uppercase font-mono"
           >
-            Have a project <span className="text-studio-cyan">in mind?</span>
+            {t.contact.title} <span className="text-studio-cyan">{t.contact.titleHighlight}</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg text-muted-foreground leading-relaxed">
-            Whether you need a high-performance web platform, an immersive 3D spatial experience,
-            or an architectural code audit — let&apos;s build something exceptional together.
+            {t.contact.description}
           </p>
         </div>
 
@@ -241,12 +242,12 @@ export function ContactSection() {
             <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-4 text-xs font-mono">
               <div className="flex items-center gap-2 text-zinc-400">
                 <Terminal className="h-4 w-4 text-studio-cyan" />
-                <span>FORM PIPELINE:</span>
+                <span>{t.contact.formPipeline}</span>
                 <span
                   className={cn(
-                    "font-bold uppercase tracking-wider",
-                    status === "idle" && "text-zinc-400",
-                    status === "focus" && "text-studio-cyan animate-pulse",
+                    "font-bold uppercase",
+                    status === "idle" && "text-studio-cyan",
+                    status === "focus" && "text-studio-lime",
                     status === "validation" && "text-amber-400",
                     status === "loading" && "text-studio-lime animate-pulse",
                     status === "success" && "text-studio-lime",
@@ -259,7 +260,7 @@ export function ContactSection() {
               </div>
               <div className="hidden sm:flex items-center gap-1.5 text-[11px] text-zinc-500">
                 <ShieldCheck className="h-3.5 w-3.5 text-studio-lime" />
-                <span>TLS 1.3 // SPAM SHIELD ACTIVE</span>
+                <span>{t.contact.tlsShield}</span>
               </div>
             </div>
 
@@ -605,17 +606,17 @@ export function ContactSection() {
                       {status === "loading" ? (
                         <>
                           <Loader2 className="h-4 w-4 animate-spin text-black" />
-                          <span>Transmitting Payload...</span>
+                          <span>{t.contact.submitting}</span>
                         </>
                       ) : (
                         <>
                           <Send className="h-4 w-4 text-black" />
-                          <span>Send Project Transmission</span>
+                          <span>{t.contact.submitButton}</span>
                         </>
                       )}
                     </Button>
                     <p className="mt-2.5 text-center text-[11px] font-mono text-zinc-500">
-                      Encrypted transport • Direct to engineering lead • No spam or agency delegation
+                      {t.contact.footerNotice}
                     </p>
                   </div>
                 </motion.form>
@@ -629,13 +630,13 @@ export function ContactSection() {
             <div className="rounded-2xl border border-white/10 bg-zinc-950/80 p-6 sm:p-8 backdrop-blur-2xl">
               <div className="flex items-center gap-2 text-xs font-mono text-studio-cyan">
                 <Sparkles className="h-4 w-4" />
-                <span>DIRECT CHANNELS</span>
+                <span>{t.contact.directChannels}</span>
               </div>
               <h3 className="mt-3 text-xl font-bold font-mono uppercase tracking-tight">
-                Direct Engineering Lead
+                {t.contact.directTitle}
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                Prefer direct email or architectural discussion? Reach out without going through sales intermediaries.
+                {t.contact.directDesc}
               </p>
 
               <div className="mt-6 space-y-5">

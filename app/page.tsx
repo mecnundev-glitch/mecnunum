@@ -13,11 +13,12 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowUpRight, Code2, FolderKanban, Terminal, ChevronDown } from "lucide-react";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
-import { STUDIO_STATUS } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n/language-context";
 import Link from "next/link";
 
 export default function HomePage() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const { t, language } = useLanguage();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -73,7 +74,7 @@ export default function HomePage() {
                 <span className="text-muted-foreground hidden sm:inline">|</span>
                 <span className="text-studio-cyan font-semibold flex items-center gap-1">
                   <Terminal className="h-3 w-3 text-studio-lime" />
-                  <span>{STUDIO_STATUS.badgeText}</span>
+                  <span>{t.hero.badgeStatus}</span>
                 </span>
               </div>
             </Magnetic>
@@ -83,10 +84,10 @@ export default function HomePage() {
           <div className="mt-6 sm:mt-8 max-w-5xl mx-auto">
             <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tight font-mono uppercase leading-[1.08] select-none break-words">
               <span className="block text-foreground drop-shadow-[0_10px_25px_rgba(0,0,0,0.5)]">
-                <TextReveal text="Digital experiences," delay={0.15} />
+                <TextReveal key={`hero-title1-${language}`} text={t.hero.title1} delay={0.15} />
               </span>
               <span className="block mt-1 bg-gradient-to-r from-studio-cyan via-studio-lime to-studio-fuchsia bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(0,240,255,0.35)]">
-                <TextReveal text="engineered with purpose." delay={0.35} />
+                <TextReveal key={`hero-title2-${language}`} text={t.hero.title2} delay={0.35} />
               </span>
             </h1>
           </div>
@@ -95,8 +96,7 @@ export default function HomePage() {
           <FadeIn direction="up" delay={0.35} className="mt-6 max-w-2xl mx-auto">
             <div className="rounded-2xl border border-white/10 dark:border-white/10 bg-background/70 dark:bg-zinc-950/75 p-4 sm:p-6 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.35)] hover:border-white/20 transition-colors pointer-events-auto">
               <p className="text-sm sm:text-base md:text-lg font-medium text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-semibold">Computer engineer</span> creating modern websites,
-                web applications and interactive digital experiences for businesses and brands.
+                {t.hero.description}
               </p>
             </div>
           </FadeIn>
@@ -116,7 +116,7 @@ export default function HomePage() {
                   className="gap-2 border-white/15 dark:border-white/15 bg-background/80 dark:bg-zinc-900/80 text-foreground hover:bg-white/10 hover:border-studio-cyan/60 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-98 transition-all duration-200 group font-bold"
                 >
                   <FolderKanban className="h-4 w-4 text-studio-cyan" />
-                  <span>View Work</span>
+                  <span>{t.hero.ctaWork}</span>
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Button>
               </Link>
@@ -131,7 +131,7 @@ export default function HomePage() {
                   className="gap-2 text-black font-extrabold shadow-[0_0_28px_rgba(204,255,0,0.35)] hover:shadow-[0_0_38px_rgba(204,255,0,0.55)] hover:scale-105 active:scale-98 transition-all duration-200 group"
                 >
                   <Sparkles className="h-4 w-4 fill-current text-black" />
-                  <span>Start a Project</span>
+                  <span>{t.hero.ctaProject}</span>
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Button>
               </Link>
@@ -153,7 +153,7 @@ export default function HomePage() {
               <span className="text-white/20 hidden sm:inline">•</span>
               <div className="flex items-center gap-1.5">
                 <span className="text-studio-fuchsia font-bold">60 FPS</span>
-                <span>Hardware Accelerated</span>
+                <span>{t.hero.techStack}</span>
               </div>
             </div>
           </FadeIn>
@@ -161,7 +161,7 @@ export default function HomePage() {
           {/* Subtle Scroll Prompt Indicator */}
           <FadeIn direction="up" delay={0.65} className="mt-8 hidden md:flex items-center justify-center">
             <div className="flex flex-col items-center gap-1 text-[11px] font-mono text-muted-foreground/60">
-              <span className="tracking-widest uppercase text-[10px]">Scroll For Journey</span>
+              <span className="tracking-widest uppercase text-[10px]">{t.hero.scrollPrompt}</span>
               <ChevronDown className="h-3.5 w-3.5 animate-bounce text-studio-cyan" />
             </div>
           </FadeIn>

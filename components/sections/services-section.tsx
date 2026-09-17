@@ -20,6 +20,7 @@ import {
   Box,
   ChevronRight,
 } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 // Lazy load the experimental 3D spatial world to maintain fast LCP
@@ -100,8 +101,9 @@ const SERVICE_META = [
 
 export function ServicesSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number>(0);
-  const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(null);
+  const [mobileExpandedIndex, setMobileExpandedIndex] = useState<number | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
 
   const activeMeta = SERVICE_META[hoveredIndex] || SERVICE_META[0];
   const activeService = SERVICES_LIST[hoveredIndex] || SERVICES_LIST[0];
@@ -112,14 +114,9 @@ export function ServicesSection() {
       aria-labelledby="services-section-heading"
       className="relative z-10 w-full py-28 sm:py-36 md:py-44 border-t border-white/10 dark:border-white/5 bg-background/95 dark:bg-zinc-950/95 backdrop-blur-xl overflow-hidden"
     >
-      {/* Dynamic Ambient Background Glow based on hovered service */}
-      <div
-        className={cn(
-          "pointer-events-none absolute -top-1/4 right-0 h-[650px] w-[650px] rounded-full bg-gradient-to-br blur-[180px] transition-all duration-700 opacity-20 dark:opacity-30",
-          activeMeta.gradientClass
-        )}
-      />
-      <div className="pointer-events-none absolute bottom-10 left-10 h-[450px] w-[450px] rounded-full bg-studio-cyan/5 blur-[160px] dark:bg-studio-cyan/10" />
+      {/* Dynamic Ambient Background Glows */}
+      <div className="pointer-events-none absolute top-1/3 right-0 h-[600px] w-[600px] rounded-full bg-studio-lime/5 blur-[180px] dark:bg-studio-lime/10" />
+      <div className="pointer-events-none absolute bottom-10 left-10 h-[500px] w-[500px] rounded-full bg-studio-cyan/5 blur-[180px] dark:bg-studio-cyan/10" />
 
       <Container className="relative z-10">
         {/* Section Header */}
@@ -127,18 +124,18 @@ export function ServicesSection() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 dark:border-white/10 bg-white/5 px-3.5 py-1 text-xs font-mono text-muted-foreground backdrop-blur-md">
               <Terminal className="h-3 w-3 text-studio-lime" />
-              <span className="text-foreground font-bold">02 // CAPABILITIES</span>
+              <span className="text-foreground font-bold">{t.services.badge}</span>
             </div>
             <h2
               id="services-section-heading"
               className="mt-4 text-3xl sm:text-5xl md:text-6xl font-mono font-black uppercase tracking-tight text-foreground"
             >
-              ENGINEERING <span className="text-studio-lime">SERVICES</span>
+              {t.services.title} <span className="text-studio-lime">{t.services.titleHighlight}</span>
             </h2>
           </div>
 
           <p className="max-w-md text-sm sm:text-base font-medium text-muted-foreground leading-relaxed">
-            Full-spectrum digital craftsmanship combining modern web engineering, editorial aesthetics, and spatial 3D WebGL.
+            {t.services.description}
           </p>
         </div>
 
@@ -304,7 +301,7 @@ export function ServicesSection() {
         <div className="mt-8 lg:hidden space-y-4">
           {SERVICES_LIST.map((service, index) => {
             const meta = SERVICE_META[index];
-            const isExpanded = activeMobileIndex === index;
+            const isExpanded = mobileExpandedIndex === index;
 
             return (
               <div
@@ -320,7 +317,7 @@ export function ServicesSection() {
                 <button
                   type="button"
                   onClick={() =>
-                    setActiveMobileIndex((prev) => (prev === index ? null : index))
+                    setMobileExpandedIndex((prev) => (prev === index ? null : index))
                   }
                   className="w-full flex items-center justify-between p-5 text-left focus:outline-none"
                   aria-expanded={isExpanded}
@@ -406,10 +403,10 @@ export function ServicesSection() {
         <div className="mt-16 sm:mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/10">
           <div className="text-center sm:text-left">
             <h4 className="font-mono text-lg font-bold text-foreground">
-              Looking for a custom creative engineering scope?
+              {t.services.bottomHeading}
             </h4>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Explore the full services matrix or request a custom proposal.
+              {t.services.bottomSubline}
             </p>
           </div>
 
@@ -420,7 +417,7 @@ export function ServicesSection() {
                 size="lg"
                 className="gap-2 text-black font-extrabold shadow-[0_0_25px_rgba(204,255,0,0.3)] hover:shadow-[0_0_35px_rgba(204,255,0,0.5)] transition-all"
               >
-                <span>Explore Services</span>
+                <span>{t.services.exploreAllServices}</span>
                 <ArrowUpRight className="h-4 w-4" />
               </Button>
             </Link>

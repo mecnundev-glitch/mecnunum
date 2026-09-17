@@ -9,6 +9,7 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { SAMPLE_PROJECTS } from "@/lib/constants";
 import { Project } from "@/types";
 import { ArrowUpRight, Terminal, Sparkles, FolderKanban, Layers } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/language-context";
 import { cn } from "@/lib/utils";
 
 // Visual Geometric Canvas Mockup / Artwork for each project (zero broken placeholders)
@@ -89,6 +90,7 @@ function ProjectArtwork({ project, isHovered }: { project: Project; isHovered: b
 export function SelectedWorkSection() {
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { t } = useLanguage();
 
   return (
     <section
@@ -106,18 +108,18 @@ export function SelectedWorkSection() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 dark:border-white/10 bg-white/5 px-3.5 py-1 text-xs font-mono text-muted-foreground backdrop-blur-md">
               <Terminal className="h-3 w-3 text-studio-cyan" />
-              <span className="text-foreground font-bold">03 // PORTFOLIO</span>
+              <span className="text-foreground font-bold">{t.work.badge}</span>
             </div>
             <h2
               id="selected-work-heading"
               className="mt-4 text-3xl sm:text-5xl md:text-6xl font-mono font-black uppercase tracking-tight text-foreground"
             >
-              SELECTED <span className="text-studio-cyan">WORK</span>
+              {t.work.title} <span className="text-studio-cyan">{t.work.titleHighlight}</span>
             </h2>
           </div>
 
           <p className="max-w-md text-sm sm:text-base font-medium text-muted-foreground leading-relaxed">
-            Curated engineering case studies, full-stack applications, and interactive 3D WebGL flagships.
+            {t.work.description}
           </p>
         </div>
 
@@ -203,10 +205,10 @@ export function SelectedWorkSection() {
         <div className="mt-16 sm:mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/10">
           <div className="text-center sm:text-left">
             <h4 className="font-mono text-lg font-bold text-foreground">
-              Explore the complete project archive
+              {t.work.bottomHeading}
             </h4>
             <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
-              Deep dives, architectural breakdowns, and engineering specifications.
+              {t.work.bottomSubline}
             </p>
           </div>
 
@@ -219,7 +221,7 @@ export function SelectedWorkSection() {
                   className="gap-2 border-white/15 hover:border-studio-cyan hover:text-studio-cyan font-mono font-bold text-xs uppercase"
                 >
                   <FolderKanban className="h-4 w-4" />
-                  <span>View Work</span>
+                  <span>{t.work.viewWork}</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Button>
               </Link>
@@ -233,7 +235,7 @@ export function SelectedWorkSection() {
                   className="gap-2 font-extrabold text-black shadow-[0_0_24px_rgba(204,255,0,0.3)]"
                 >
                   <Sparkles className="h-4 w-4 fill-current text-black" />
-                  <span>Start a Project</span>
+                  <span>{t.work.startProject}</span>
                   <ArrowUpRight className="h-4 w-4" />
                 </Button>
               </Link>

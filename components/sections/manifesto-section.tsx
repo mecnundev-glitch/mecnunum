@@ -7,6 +7,7 @@ import { Sparkles, Terminal, ArrowUpRight, Cpu, Layers, Zap } from "lucide-react
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/motion/magnetic";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 interface ScrollWordProps {
   children: string;
@@ -33,20 +34,28 @@ function ScrollWord({ children, range, progress }: ScrollWordProps) {
   );
 }
 
-const MANIFESTO_TEXT_1 = "I don't just build websites.";
-const MANIFESTO_TEXT_2 = "I engineer bespoke digital experiences that help businesses communicate, perform and grow.";
-
 export function ManifestoSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { t, language } = useLanguage();
+
+  const manifestoText1 =
+    language === "tr"
+      ? "Sadece web sitesi yapmıyorum."
+      : "I don't just build websites.";
+
+  const manifestoText2 =
+    language === "tr"
+      ? "İşletmelerin iletişim kurmasını, performans göstermesini ve büyümesini sağlayan özel dijital deneyimler tasarlıyorum."
+      : "I engineer bespoke digital experiences that help businesses communicate, perform and grow.";
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 0.85", "end 0.4"],
   });
 
-  const words1 = MANIFESTO_TEXT_1.split(" ");
-  const words2 = MANIFESTO_TEXT_2.split(" ");
+  const words1 = manifestoText1.split(" ");
+  const words2 = manifestoText2.split(" ");
   const totalWords = words1.length + words2.length;
 
   return (
@@ -67,7 +76,7 @@ export function ManifestoSection() {
         <div className="flex items-center gap-3">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 dark:border-white/10 bg-white/5 px-3.5 py-1 text-xs font-mono text-muted-foreground backdrop-blur-md">
             <Terminal className="h-3 w-3 text-studio-cyan" />
-            <span className="text-foreground font-bold">01 // MANIFESTO</span>
+            <span className="text-foreground font-bold">{t.manifesto.badge}</span>
           </div>
           <div className="h-px flex-1 bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
         </div>
@@ -75,15 +84,15 @@ export function ManifestoSection() {
         {/* Large Editorial Manifesto Typography */}
         <div className="mt-12 sm:mt-16 md:mt-20">
           <h2 id="manifesto-heading" className="sr-only">
-            Studio Manifesto: Digital Experiences Engineered with Purpose
+            {t.manifesto.heading}
           </h2>
 
-          {/* Statement 1: I don't just build websites. */}
+          {/* Statement 1 */}
           <div className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-black uppercase tracking-tight leading-[1.15]">
             {shouldReduceMotion ? (
-              <p className="text-muted-foreground/80">{MANIFESTO_TEXT_1}</p>
+              <p className="text-muted-foreground/80">{manifestoText1}</p>
             ) : (
-              <p className="flex flex-wrap">
+              <p className="flex flex-wrap" key={`m1-${language}`}>
                 {words1.map((word, i) => {
                   const start = (i / totalWords) * 0.45;
                   const end = start + 0.12;
@@ -97,14 +106,14 @@ export function ManifestoSection() {
             )}
           </div>
 
-          {/* Statement 2: I engineer bespoke digital experiences... */}
+          {/* Statement 2 */}
           <div className="mt-8 sm:mt-12 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-mono font-black uppercase tracking-tight leading-[1.15]">
             {shouldReduceMotion ? (
               <p className="bg-gradient-to-r from-studio-cyan via-studio-lime to-white bg-clip-text text-transparent">
-                {MANIFESTO_TEXT_2}
+                {manifestoText2}
               </p>
             ) : (
-              <p className="flex flex-wrap">
+              <p className="flex flex-wrap" key={`m2-${language}`}>
                 {words2.map((word, i) => {
                   const globalIndex = words1.length + i;
                   const start = 0.35 + (i / words2.length) * 0.55;
@@ -129,42 +138,54 @@ export function ManifestoSection() {
           {/* Pillar 1 */}
           <div className="group rounded-2xl border border-white/10 dark:border-white/5 bg-background/60 dark:bg-zinc-950/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-studio-cyan/40 hover:shadow-[0_0_30px_rgba(0,240,255,0.1)]">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-studio-cyan">01 / ARCHITECTURE</span>
+              <span className="font-mono text-xs text-studio-cyan">
+                {language === "tr" ? "01 / MİMARİ" : "01 / ARCHITECTURE"}
+              </span>
               <Layers className="h-4 w-4 text-studio-cyan transition-transform group-hover:scale-110" />
             </div>
             <h3 className="mt-4 text-lg font-mono font-bold text-foreground">
-              Zero-Template Purity
+              {language === "tr" ? "Sıfır Şablon Saflığı" : "Zero-Template Purity"}
             </h3>
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Every interface is handcrafted with tailored design systems, bespoke animations, and purpose-built component architectures.
+              {language === "tr"
+                ? "Her arayüz özel tasarım sistemleri, özgün animasyonlar ve amaca yönelik bileşen mimarisiyle sıfırdan inşa edilir."
+                : "Every interface is handcrafted with tailored design systems, bespoke animations, and purpose-built component architectures."}
             </p>
           </div>
 
           {/* Pillar 2 */}
           <div className="group rounded-2xl border border-white/10 dark:border-white/5 bg-background/60 dark:bg-zinc-950/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-studio-lime/40 hover:shadow-[0_0_30px_rgba(204,255,0,0.1)]">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-studio-lime">02 / VELOCITY</span>
+              <span className="font-mono text-xs text-studio-lime">
+                {language === "tr" ? "02 / HIZ & PERFORMANS" : "02 / VELOCITY"}
+              </span>
               <Zap className="h-4 w-4 text-studio-lime transition-transform group-hover:scale-110" />
             </div>
             <h3 className="mt-4 text-lg font-mono font-bold text-foreground">
-              Sub-second & 60 FPS
+              {language === "tr" ? "1s Altı & 60 FPS" : "Sub-second & 60 FPS"}
             </h3>
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Obsessive optimization for Core Web Vitals, hardware-accelerated 3D WebGL rendering, and instant edge-cached page loads.
+              {language === "tr"
+                ? "Core Web Vitals için titiz optimizasyon, donanım hızlandırmalı 3D WebGL ve anlık edge önbellekleme."
+                : "Obsessive optimization for Core Web Vitals, hardware-accelerated 3D WebGL rendering, and instant edge-cached page loads."}
             </p>
           </div>
 
           {/* Pillar 3 */}
           <div className="group rounded-2xl border border-white/10 dark:border-white/5 bg-background/60 dark:bg-zinc-950/60 p-6 backdrop-blur-xl transition-all duration-300 hover:border-studio-fuchsia/40 hover:shadow-[0_0_30px_rgba(255,0,127,0.1)]">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs text-studio-fuchsia">03 / CONVERSION</span>
+              <span className="font-mono text-xs text-studio-fuchsia">
+                {language === "tr" ? "03 / DÖNÜŞÜM" : "03 / CONVERSION"}
+              </span>
               <Cpu className="h-4 w-4 text-studio-fuchsia transition-transform group-hover:scale-110" />
             </div>
             <h3 className="mt-4 text-lg font-mono font-bold text-foreground">
-              Strategic Dominance
+              {language === "tr" ? "Stratejik Otorite" : "Strategic Dominance"}
             </h3>
             <p className="mt-2 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              Digital flagships designed to command industry authority, establish trust, and turn visitors into long-term clients.
+              {language === "tr"
+                ? "Sektörde güven oluşturan ve ziyaretçileri uzun vadeli müşterilere dönüştüren dijital amiral gemileri."
+                : "Digital flagships designed to command industry authority, establish trust, and turn visitors into long-term clients."}
             </p>
           </div>
         </div>
@@ -173,7 +194,11 @@ export function ManifestoSection() {
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-white/5">
           <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground">
             <span className="h-2 w-2 rounded-full bg-studio-lime animate-pulse" />
-            <span>Ready to elevate your digital presence?</span>
+            <span>
+              {language === "tr"
+                ? "Dijital varlığınızı zirveye taşımaya hazır mısınız?"
+                : "Ready to elevate your digital presence?"}
+            </span>
           </div>
           <Magnetic strength={0.2}>
             <Link href="/services">
@@ -182,7 +207,7 @@ export function ManifestoSection() {
                 size="sm"
                 className="gap-2 border-white/10 text-xs font-mono font-bold hover:border-studio-cyan/60 hover:text-studio-cyan"
               >
-                <span>Explore Capabilities</span>
+                <span>{t.services.exploreAllServices}</span>
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </Button>
             </Link>

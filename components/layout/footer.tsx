@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
@@ -5,9 +7,16 @@ import { siteConfig } from "@/lib/site-config";
 import { STUDIO_STATUS } from "@/lib/constants";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
 import { BRAND } from "@/lib/design-system";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t, language } = useLanguage();
+
+  const titles =
+    language === "tr"
+      ? ["Bilgisayar Mühendisi", "Web Geliştirici", "Kreatif Mühendislik"]
+      : BRAND.titles;
 
   return (
     <footer className="w-full border-t border-white/10 dark:border-white/5 bg-background py-12">
@@ -20,15 +29,15 @@ export function Footer() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-studio-lime opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-studio-lime"></span>
             </span>
-            <span className="font-mono font-medium text-foreground/90">{STUDIO_STATUS.badgeText}</span>
+            <span className="font-mono font-medium text-foreground/90">{t.hero.badgeStatus}</span>
           </div>
           <span className="hidden sm:inline text-border">•</span>
           <span className="font-mono text-[11px] text-muted-foreground">
-            {BRAND.titles.join(" // ")}
+            {titles.join(" // ")}
           </span>
           <span className="hidden sm:inline text-border">•</span>
           <span>
-            © {currentYear} {siteConfig.name}
+            © {currentYear} {siteConfig.name} • {t.footer.rights}
           </span>
         </div>
 
@@ -71,3 +80,5 @@ export function Footer() {
     </footer>
   );
 }
+
+export default Footer;

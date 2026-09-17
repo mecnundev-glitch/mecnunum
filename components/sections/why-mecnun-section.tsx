@@ -9,63 +9,74 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { FadeIn } from "@/components/motion/fade-in";
 import { InteractiveTechMatrix } from "@/components/sections/interactive-tech-matrix";
 import { MecnunCatIcon } from "@/components/ui/mecnun-logo";
+import { useLanguage } from "@/lib/i18n/language-context";
 import {
   Sparkles,
   Terminal,
   Cpu,
-  Code2,
   Gauge,
   Layers,
   ArrowUpRight,
-  ShieldCheck,
-  CheckCircle2,
 } from "lucide-react";
-
-const WHY_DIFFERENTIATORS = [
-  {
-    number: "01",
-    title: "Computer Engineer Rigor",
-    subtitle: "Built from algorithmic first principles",
-    desc: "Not a template agency relying on fragile page-builders. Every component, state machine, and data pipeline is architected for clean scale and security.",
-    icon: Cpu,
-    color: "text-studio-cyan",
-    border: "border-studio-cyan/30",
-    glow: "bg-studio-cyan/5",
-  },
-  {
-    number: "02",
-    title: "Editorial Digital Artistry",
-    subtitle: "Awwwards-level bespoke aesthetics",
-    desc: "Balancing high-fashion editorial typography, fluid spring dynamics, and subtle dark-mode glassmorphism that gives your brand immediate authority.",
-    icon: Sparkles,
-    color: "text-studio-lime",
-    border: "border-studio-lime/30",
-    glow: "bg-studio-lime/5",
-  },
-  {
-    number: "03",
-    title: "Purpose-Driven 3D & WebGL",
-    subtitle: "Narrative, interaction, and information",
-    desc: "Zero gratuitous particle noise. 3D scenes are engineered with adaptive GPU throttling, 60 FPS hardware acceleration, and accessible WebGL fallbacks.",
-    icon: Layers,
-    color: "text-studio-fuchsia",
-    border: "border-studio-fuchsia/30",
-    glow: "bg-studio-fuchsia/5",
-  },
-  {
-    number: "04",
-    title: "Sub-Second Performance",
-    subtitle: "Core Web Vitals & Lighthouse 95+",
-    desc: "Edge-distributed Next.js 14 App Router, modern AVIF/WebP image streaming, and tree-shaken bundles that convert visitors without lag.",
-    icon: Gauge,
-    color: "text-amber-400",
-    border: "border-amber-400/30",
-    glow: "bg-amber-400/5",
-  },
-];
 
 export function WhyMecnunSection() {
   const shouldReduceMotion = useReducedMotion();
+  const { t, language } = useLanguage();
+
+  const differentiators = [
+    {
+      number: "01",
+      title: language === "tr" ? "Bilgisayar Mühendisliği Disiplini" : "Computer Engineer Rigor",
+      subtitle: language === "tr" ? "Algoritmik temellerle inşa edilmiş" : "Built from algorithmic first principles",
+      desc:
+        language === "tr"
+          ? "Şablon ajansı değiliz. Her bileşen, durum makinesi ve veri hattı ölçeklenebilirlik ve güvenlik için sıfırdan mimarilendirilir."
+          : "Not a template agency relying on fragile page-builders. Every component, state machine, and data pipeline is architected for clean scale and security.",
+      icon: Cpu,
+      color: "text-studio-cyan",
+      border: "border-studio-cyan/30",
+      glow: "bg-studio-cyan/5",
+    },
+    {
+      number: "02",
+      title: language === "tr" ? "Editoryal Dijital Sanat" : "Editorial Digital Artistry",
+      subtitle: language === "tr" ? "Awwwards seviyesinde özgün estetik" : "Awwwards-level bespoke aesthetics",
+      desc:
+        language === "tr"
+          ? "Yüksek tipografi ritmi, akıcı fiziksel geçişler ve markanıza anında prestij kazandıran zarif karanlık mod cam morfizmleri."
+          : "Balancing high-fashion editorial typography, fluid spring dynamics, and subtle dark-mode glassmorphism that gives your brand immediate authority.",
+      icon: Sparkles,
+      color: "text-studio-lime",
+      border: "border-studio-lime/30",
+      glow: "bg-studio-lime/5",
+    },
+    {
+      number: "03",
+      title: language === "tr" ? "Amaca Yönelik 3D & WebGL" : "Purpose-Driven 3D & WebGL",
+      subtitle: language === "tr" ? "Anlatı, etkileşim ve bilgi aktarımı" : "Narrative, interaction, and information",
+      desc:
+        language === "tr"
+          ? "Gereksiz partikül kalabalığı yok. 3D sahneler adaptif GPU optimizasyonu, 60 FPS donanım ivmesi ve erişilebilir fallback'ler ile çalışır."
+          : "Zero gratuitous particle noise. 3D scenes are engineered with adaptive GPU throttling, 60 FPS hardware acceleration, and accessible WebGL fallbacks.",
+      icon: Layers,
+      color: "text-studio-fuchsia",
+      border: "border-studio-fuchsia/30",
+      glow: "bg-studio-fuchsia/5",
+    },
+    {
+      number: "04",
+      title: language === "tr" ? "1 Saniye Altı Performans" : "Sub-Second Performance",
+      subtitle: language === "tr" ? "Core Web Vitals & Lighthouse 95+" : "Core Web Vitals & Lighthouse 95+",
+      desc:
+        language === "tr"
+          ? "Edge dağıtımlı Next.js 14 App Router, modern AVIF/WebP akışı ve ziyaretçiyi bekletmeden dönüştüren optimize paketler."
+          : "Edge-distributed Next.js 14 App Router, modern AVIF/WebP image streaming, and tree-shaken bundles that convert visitors without lag.",
+      icon: Gauge,
+      color: "text-amber-400",
+      border: "border-amber-400/30",
+      glow: "bg-amber-400/5",
+    },
+  ];
 
   return (
     <section
@@ -84,24 +95,24 @@ export function WhyMecnunSection() {
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-studio-cyan/30 bg-studio-cyan/10 px-4 py-1.5 text-xs font-mono text-studio-cyan">
                 <MecnunCatIcon size={16} />
-                <span>04 // IDENTITY & VALUE PROPOSITION</span>
+                <span>{t.why.badge}</span>
               </div>
               <h2
                 id="why-mecnun-heading"
                 className="mt-4 text-3xl sm:text-5xl md:text-6xl font-black font-mono uppercase tracking-tight text-foreground"
               >
-                WHY <span className="text-studio-cyan">MECNUN</span>
+                {t.why.title} <span className="text-studio-cyan">{t.why.titleHighlight}</span>
               </h2>
             </div>
             <p className="max-w-md text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Bridging the gap between software engineering discipline and bespoke creative direction. We build enduring digital assets that elevate brands.
+              {t.why.description}
             </p>
           </div>
         </FadeIn>
 
         {/* 4 Core Value Pillars Grid */}
         <div className="mt-14 sm:mt-18 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {WHY_DIFFERENTIATORS.map((diff, idx) => {
+          {differentiators.map((diff, idx) => {
             const Icon = diff.icon;
 
             return (
@@ -151,13 +162,13 @@ export function WhyMecnunSection() {
             <div className="max-w-2xl space-y-3">
               <div className="inline-flex items-center gap-2 text-xs font-mono text-studio-lime font-bold">
                 <Terminal className="h-4 w-4" />
-                <span>STUDIO PHILOSOPHY</span>
+                <span>{t.why.philosophyTitle}</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-mono font-black uppercase text-foreground leading-snug">
-                &ldquo;Code is not just functionality. Architecture is brand identity.&rdquo;
+                &ldquo;{t.why.philosophyQuote}&rdquo;
               </h3>
               <p className="text-xs sm:text-sm text-zinc-300">
-                Ready to transform your digital presence into a high-performance, conversion-driven flagship?
+                {t.why.philosophyDesc}
               </p>
             </div>
 
@@ -170,7 +181,7 @@ export function WhyMecnunSection() {
                     className="gap-2 font-extrabold text-black shadow-[0_0_28px_rgba(204,255,0,0.35)]"
                   >
                     <Sparkles className="h-4 w-4 fill-current text-black" />
-                    <span>Let&apos;s Talk</span>
+                    <span>{t.why.letsTalk}</span>
                     <ArrowUpRight className="h-4 w-4" />
                   </Button>
                 </Link>
@@ -183,7 +194,7 @@ export function WhyMecnunSection() {
                     size="lg"
                     className="gap-2 border-white/20 font-mono font-bold text-xs uppercase hover:border-studio-cyan"
                   >
-                    <span>About The Engineer</span>
+                    <span>{t.why.aboutEngineer}</span>
                     <ArrowUpRight className="h-4 w-4" />
                   </Button>
                 </Link>
