@@ -218,7 +218,7 @@ export function ContactSection() {
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-studio-cyan/30 bg-studio-cyan/5 px-4 py-1.5 text-xs font-mono text-studio-cyan">
             <MecnunCatIcon size={18} />
-            <span>{"TRANSMISSION INTAKE // STATE 15"}</span>
+            <span>{"05 // DIRECT TRANSMISSION & INQUIRY"}</span>
           </div>
 
           <h2

@@ -210,19 +210,35 @@ export function SelectedWorkSection() {
             </p>
           </div>
 
-          <Magnetic strength={0.2}>
-            <Link href="/work">
-              <Button
-                variant="outline"
-                size="lg"
-                className="gap-2 border-white/15 hover:border-studio-cyan hover:text-studio-cyan font-mono font-bold text-xs uppercase"
-              >
-                <FolderKanban className="h-4 w-4" />
-                <span>All Projects Archive</span>
-                <ArrowUpRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </Magnetic>
+          <div className="flex flex-wrap items-center gap-3.5">
+            <Magnetic strength={0.2}>
+              <Link href="/work">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="gap-2 border-white/15 hover:border-studio-cyan hover:text-studio-cyan font-mono font-bold text-xs uppercase"
+                >
+                  <FolderKanban className="h-4 w-4" />
+                  <span>View Work</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </Magnetic>
+
+            <Magnetic strength={0.2}>
+              <Link href="/contact">
+                <Button
+                  variant="accent"
+                  size="lg"
+                  className="gap-2 font-extrabold text-black shadow-[0_0_24px_rgba(204,255,0,0.3)]"
+                >
+                  <Sparkles className="h-4 w-4 fill-current text-black" />
+                  <span>Start a Project</span>
+                  <ArrowUpRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </Magnetic>
+          </div>
         </div>
       </Container>
     </section>

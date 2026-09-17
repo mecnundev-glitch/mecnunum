@@ -2,8 +2,8 @@ export * from "./manifesto-section";
 export * from "./services-section";
 export * from "./selected-work-section";
 export * from "./process-timeline";
+export * from "./how-i-work-section";
 export * from "./interactive-tech-matrix";
+export * from "./why-mecnun-section";
 export * from "./contact-section";
 export * from "./service-landing-view";
-
-

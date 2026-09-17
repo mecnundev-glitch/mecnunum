@@ -2,12 +2,24 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { FadeIn } from "@/components/motion/fade-in";
+import { Magnetic } from "@/components/motion/magnetic";
+import { Button } from "@/components/ui/button";
 import { SAMPLE_PROJECTS } from "@/lib/constants";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, FolderKanban, Zap } from "lucide-react";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
-  title: "Selected Works & Case Studies",
-  description: "Explore bespoke digital flagship platforms, 3D WebGL universes, and high-performance web engineering projects by MECNUN.",
+  title: "Selected Works & Case Studies | MECNUN",
+  description:
+    "Explore bespoke digital flagship platforms, 3D WebGL universes, and high-performance web engineering projects by MECNUN.",
+  alternates: {
+    canonical: `${siteConfig.url}/work`,
+  },
+  openGraph: {
+    title: "Selected Works & Case Studies | MECNUN",
+    description: "Curated archive of creative engineering and interactive WebGL case studies.",
+    url: `${siteConfig.url}/work`,
+  },
 };
 
 export default function WorkPage() {
@@ -67,6 +79,59 @@ export default function WorkPage() {
               </Link>
             </FadeIn>
           ))}
+        </div>
+
+        {/* Conversion Footer CTA (Portfolio -> Contact) */}
+        <div className="mt-24 pt-16 border-t border-white/10">
+          <FadeIn direction="up">
+            <div className="rounded-3xl border border-white/15 bg-gradient-to-br from-zinc-900/90 to-zinc-950 p-8 sm:p-14 backdrop-blur-2xl text-center relative overflow-hidden shadow-2xl">
+              <div className="pointer-events-none absolute -top-1/2 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-studio-cyan/20 blur-[130px]" />
+
+              <div className="relative z-10 max-w-2xl mx-auto space-y-4">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono text-studio-lime bg-studio-lime/10 border border-studio-lime/20">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>START YOUR PROJECT</span>
+                </span>
+
+                <h2 className="text-3xl sm:text-5xl font-mono font-black uppercase text-foreground">
+                  Ready to build something iconic?
+                </h2>
+
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  Let&apos;s engineer a high-performance, bespoke digital flagship for your business.
+                </p>
+
+                <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+                  <Magnetic strength={0.22}>
+                    <Link href="/contact">
+                      <Button
+                        variant="accent"
+                        size="lg"
+                        className="gap-2 font-extrabold text-black shadow-[0_0_30px_rgba(204,255,0,0.35)]"
+                      >
+                        <Zap className="h-4 w-4 fill-current text-black" />
+                        <span>Start a Project</span>
+                        <ArrowUpRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </Magnetic>
+
+                  <Magnetic strength={0.22}>
+                    <Link href="/services">
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="gap-2 border-white/20 font-mono font-bold text-xs uppercase hover:border-studio-cyan"
+                      >
+                        <span>Explore Services</span>
+                        <ArrowUpRight className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </Magnetic>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </Container>
     </div>

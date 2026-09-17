@@ -7,6 +7,8 @@ import { FadeIn, Magnetic, TextReveal } from "@/components/motion";
 import { ManifestoSection } from "@/components/sections/manifesto-section";
 import { ServicesSection } from "@/components/sections/services-section";
 import { SelectedWorkSection } from "@/components/sections/selected-work-section";
+import { HowIWorkSection } from "@/components/sections/how-i-work-section";
+import { WhyMecnunSection } from "@/components/sections/why-mecnun-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Button } from "@/components/ui/button";
 import { Sparkles, ArrowUpRight, Code2, FolderKanban, Terminal, ChevronDown } from "lucide-react";
@@ -105,7 +107,7 @@ export default function HomePage() {
             delay={0.45}
             className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3.5 sm:gap-4 pointer-events-auto"
           >
-            {/* CTA 1: View Selected Work */}
+            {/* CTA 1: View Work */}
             <Magnetic strength={0.22}>
               <Link href="/work">
                 <Button
@@ -114,7 +116,7 @@ export default function HomePage() {
                   className="gap-2 border-white/15 dark:border-white/15 bg-background/80 dark:bg-zinc-900/80 text-foreground hover:bg-white/10 hover:border-studio-cyan/60 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.2)] hover:scale-105 active:scale-98 transition-all duration-200 group font-bold"
                 >
                   <FolderKanban className="h-4 w-4 text-studio-cyan" />
-                  <span>View Selected Work</span>
+                  <span>View Work</span>
                   <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Button>
               </Link>
@@ -159,23 +161,29 @@ export default function HomePage() {
           {/* Subtle Scroll Prompt Indicator */}
           <FadeIn direction="up" delay={0.65} className="mt-8 hidden md:flex items-center justify-center">
             <div className="flex flex-col items-center gap-1 text-[11px] font-mono text-muted-foreground/60">
-              <span className="tracking-widest uppercase text-[10px]">Scroll For Manifesto</span>
+              <span className="tracking-widest uppercase text-[10px]">Scroll For Journey</span>
               <ChevronDown className="h-3.5 w-3.5 animate-bounce text-studio-cyan" />
             </div>
           </FadeIn>
         </Container>
       </div>
 
-      {/* ─── 02 EDITORIAL MANIFESTO SECTION (SCROLL-DRIVEN REVEAL) ─── */}
+      {/* ─── 02 MANIFESTO PHILOSOPHY (SCROLL-DRIVEN REVEAL) ─── */}
       <ManifestoSection />
 
-      {/* ─── 03 SERVICES EXPERIENCE SECTION (INTERACTIVE EDITORIAL LIST & 3D WORLD) ─── */}
+      {/* ─── 03 WHAT I DO (SERVICES EXPERIENCE & 3D CONSTELLATION) ─── */}
       <ServicesSection />
 
-      {/* ─── 04 SELECTED WORK SECTION (DATA-DRIVEN EDITORIAL PORTFOLIO) ─── */}
+      {/* ─── 04 SELECTED WORK (PORTFOLIO & CASE STUDIES) ─── */}
       <SelectedWorkSection />
 
-      {/* ─── 05 DIRECT TRANSMISSION & CONTACT INTAKE ─── */}
+      {/* ─── 05 HOW I WORK (7-STAGE CLIENT PIPELINE & SPRINT ACCESS) ─── */}
+      <HowIWorkSection />
+
+      {/* ─── 06 WHY MECNUN (ENGINEERING RIGOR & TECH MATRIX) ─── */}
+      <WhyMecnunSection />
+
+      {/* ─── 07 CONTACT (DIRECT TRANSMISSION & PROJECT INTAKE) ─── */}
       <ContactSection />
     </div>
   );
